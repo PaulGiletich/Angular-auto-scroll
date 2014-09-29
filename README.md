@@ -2,6 +2,7 @@ Angular-auto-scroll
 ===================
 
 usage:
+
     auto-scroll="{scrollTo: '.active-item', watch: 'activeItem', offsetTop: 10}"
 
 options:
