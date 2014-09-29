@@ -1,0 +1,49 @@
+.<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js'></script>
+    <script src='src/directives/AutoScroll.js'></script>
+    <script>
+        angular.module('autoScrollExample', ['auto-scroll'])
+                .controller('AutoScrollExampleCtrl', function($scope) {
+                    $scope.items =[
+                        {name: 'Item'},{name: 'Item'},{name: 'Item'},
+                        {name: 'Item'},{name: 'Item'},{name: 'Item'},
+                        {name: 'Item'},{name: 'Item'},{name: 'Item'},
+                        {name: 'Item'},{name: 'Item'},{name: 'Item'},
+                    ];
+
+                    $scope.changeItem = function (index) {
+                        $scope.activeItem = $scope.items[index];
+                    }
+                })
+    </script>
+    <style>
+        .item {
+            font-size: 70px;;
+        }
+        .active-item {
+            background-color: lightgrey;
+        }
+        .scroll-container {
+            height: 300px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body ng-app="autoScrollExample" ng-controller="AutoScrollExampleCtrl">
+<div class="scroll-container"
+     auto-scroll="{offsetTop: 10, scrollTo: '.active-item', watch: 'activeItem'}">
+    <div class="item" ng-repeat="item in items" ng-class="{'active-item': item == activeItem}">
+        <span ng-bind="$index"></span> <span ng-bind="item.name"></span>
+    </div>
+</div>
+<form ng-submit="changeItem(inputIndex)">
+    <input type="number" ng-model="inputIndex" placeholder="item number">
+    <button type="submit">change active item</button>
+</form>
+</body>
+</html>
